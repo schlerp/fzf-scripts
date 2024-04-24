@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+INSIDE_GIT_REPO="$(git rev-parse --is-inside-work-tree 2>/dev/null)"
+
+checkout_branch () {
+    branch="$1"
+    git checkout "$branch" 2>/dev/null || git checkout -b "$branch"
+}
+
+if [ "$INSIDE_GIT_REPO" ]; then
+    CHOSEN_BRANCH=$(git branch \
+        | fzf --reverse --info=inline --print-query \
+        --preview="git log -p {1} | delta --no-gitconfig" \
+        --bind="ctrl-p:execute:echo {} | cut -c 3- | xargs git pull -p origin " \
+        | tail -1 | xargs echo)
+    checkout_branch "$CHOSEN_BRANCH"
+else
+    echo "Not in a git repo!"
+fi

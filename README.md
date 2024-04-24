@@ -27,3 +27,27 @@ I can use fzf to find the files, then if there is something I need LSP features 
 #### Inspiration/Origins/Kudos
 
 * [junegunn/fzf - ADVANCED.md](https://github.com/junegunn/fzf/blob/master/ADVANCED.md)
+
+### fgb - Fuzzy Git Branch
+
+This script is one I wrote recently for jumping between branches.
+I had been working on a few closely related and therefore similarly named branches and wanted a way to jump between them easily.
+This script uses `git-delta` to give a nice overview of each branches commits.
+It's ended up being one of my favourite terminal based scripts.
+
+suggested tmux mapping: `bind B display-popup -E "fgb"`
+
+#### Features
+
+* uses `git-delta` to give a nice run down of recent commits on each branch
+* pressing `return` will check out the selected branch
+* pressing `ctrl-p` to pull (with prune) the current selected branch
+
+#### Dependencies
+
+* delta - `brew install git-delta`
+* git - comes as part of xcode cli tools, or `brew install git`
+
+#### Inspiration/Origins/Kudos
+
+* [junegunn/fzf - ADVANCED.md](https://github.com/junegunn/fzf/blob/master/ADVANCED.md)
